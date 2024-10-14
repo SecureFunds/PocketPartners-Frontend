@@ -1,0 +1,6 @@
+<div class="new-expense">
+  <h1 class="title">
+    {{ 'expense.add_new' | translate }} 
+  </h1>
+  <app-form-expense (onAddExpense)="onSubmit($event)" [user]="user" [joinedGroups]="joinedGroups"></app-form-expense>
+</div>

@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f8f8f8; /* Fondo claro */
+  margin: 0;
+  padding: 0;
+}
+
+.title-container {
+  
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin: 20px 0;
+}
+
+.title-container h1 {
+  padding: 10px 20px;
+  background-color: #ff9900; /* Naranja claro */
+  border-radius: 20px;
+  color: #fff;
+  font-size: 24px;
+}
+
+.matcard{
+  display: flex;
+  flex-wrap: wrap;
+
+ justify-content: space-between;
+ align-items: center;
+  
+}
+
+.mat-title{
+  
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  background-color: #ffffff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap; /* Permitir que las tarjetas se ajusten */
+  margin: 0 1.5rem 40px;
+}
+
+.card {
+  flex: 1 1 300px; /* Tarjetas mínimas de 300px */
+  margin: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  background-color: #ffffff;
+  transition: transform 0.3s;
+  max-width: 90%; /* Limitar el ancho máximo */
+}
+
+.group-container {
+  padding: 1rem;
+}
+
+.group-card {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background-color: #fff9fa; /* Naranja claro */
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.group-card:hover {
+  transform: translateY(-5px);
+}
+
+.btnPago {
+  color: white;
+  background-color: #ff7043; /* Color de botón */
+  border: none;
+  border-radius: 5px;
+  padding: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btnPago:hover {
+  background-color: #ff5722; /* Color de botón al pasar el mouse */
+}
+
+/* Media Queries para mayor responsividad */
+@media only screen and (max-width: 768px) {
+  .cards {
+    justify-content: center; /* Centrar tarjetas en pantallas más pequeñas */
+  }
+
+  .matcard{
+    display: flex;
+    gap:10px;
+  
+   justify-content: center;
+   align-items: center;
+    
+  }
+
+  .card {
+    flex: 1 1 calc(50% - 2rem); /* 2 tarjetas por fila en pantallas medianas */
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .card {
+    flex: 1 1 calc(100% - 2rem); /* Tarjetas ocupan el 100% del ancho en pantallas pequeñas */
+  }
+
+  .matcard{
+    display: flex;
+    gap:10px;
+  
+   justify-content: center;
+   align-items: center;
+    
+  }
+
+  .title-container h1 {
+    font-size: 20px; /* Tamaño de fuente más pequeño en pantallas pequeñas */
+  }
+
+  .btnPago {
+    
+    padding: 20px; /* Tamaño de botón más pequeño en pantallas pequeñas */
+    font-size: 14px; /* Fuente más pequeña en botones */
+  }
+}

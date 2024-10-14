@@ -1,0 +1,90 @@
+<mat-stepper #stepper>
+  <mat-step [stepControl]="firstFormGroup">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel>
+        {{ 'expense.new' | translate }} <!-- Traducción para "New Expense" -->
+      </ng-template>
+      <mat-form-field>
+        <mat-label>{{ 'expense.name' | translate }}</mat-label> <!-- Traducción para "Give it a name" -->
+        <input matInput formControlName="firstCtrl" required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperNext>{{ 'common.next' | translate }}</button> <!-- Traducción para "Next" -->
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="thirdFormGroup">
+    <form [formGroup]="thirdFormGroup">
+      <ng-template matStepLabel>
+        {{ 'expense.amount' | translate }} <!-- Traducción para "How much?" -->
+      </ng-template>
+      <mat-form-field>
+        <mat-label>{{ 'expense.set_amount' | translate }}</mat-label> <!-- Traducción para "Set the amount" -->
+        <input type="number" matInput formControlName="firstCtrl" required>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>{{ 'common.back' | translate }}</button> <!-- Traducción para "Back" -->
+        <button mat-button matStepperNext>{{ 'common.next' | translate }}</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="fourthFormGroup">
+    <form [formGroup]="fourthFormGroup">
+      <ng-template matStepLabel>
+        {{ 'expense.group' | translate }} <!-- Traducción para "Which group?" -->
+      </ng-template>
+      <mat-form-field>
+        <mat-label>{{ 'expense.pick_group' | translate }}</mat-label> <!-- Traducción para "Pick a group" -->
+        <mat-select formControlName="firstCtrl" required>
+          <mat-option *ngFor="let group of joinedGroups" [value]="group.id">
+            {{ group.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>{{ 'common.back' | translate }}</button>
+        <button mat-button matStepperNext>{{ 'common.next' | translate }}</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="fifthFormGroup">
+    <form [formGroup]="fifthFormGroup">
+      <ng-template matStepLabel>{{ 'expense.dueDate' | translate }}</ng-template>
+
+      <mat-form-field appearance="fill">
+        <mat-label>{{ 'payment.dueDate' | translate }}</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="dueDateCtrl" required>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="fifthFormGroup.get('dueDateCtrl')?.hasError('required')">
+          {{ 'payment.dateRequired' | translate }}
+        </mat-error>
+      </mat-form-field>
+
+      <div>
+        <button mat-button matStepperPrevious>{{ 'common.back' | translate }}</button>
+        <button mat-button matStepperNext>{{ 'common.next' | translate }}</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>
+      {{ 'expense.summary' | translate }} <!-- Traducción para "Summary" -->
+    </ng-template>
+    <div>
+      <h1>{{ 'expense.summary' | translate }}</h1>
+      <p>{{ 'expense.name' | translate }}: {{ firstFormGroup.value.firstCtrl }}</p>
+      <p>{{ 'expense.amount' | translate }}: {{ thirdFormGroup.value.firstCtrl }}</p>
+      <p>{{ 'expense.group' | translate }}: {{ fourthFormGroup.value.firstCtrl }}</p>
+      <p>{{ 'expense.dueDate' | translate }}: {{ fifthFormGroup.value.dueDateCtrl | date }}</p>
+    </div>
+    <div>
+      <button mat-button matStepperPrevious>{{ 'common.back' | translate }}</button>
+      <button mat-button (click)="onSubmit()">{{ 'common.submit' | translate }}</button> <!-- Traducción para "Submit" -->
+    </div>
+  </mat-step>
+</mat-stepper>

@@ -57,6 +57,7 @@ import { DarkModeSwitcherComponent } from './public/components/dark-mode-switche
 import {MatSlideToggle} from "@angular/material/slide-toggle";
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { GroupJoinDialogComponent } from './group/components/group-join-dialog/group-join-dialog.component';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -87,7 +88,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     PageGroupDetailsComponent,
     AuthenticationSectionComponent,
     SignInComponent,
-    SignUpComponent,],
+    SignUpComponent,
+    GroupJoinDialogComponent,],
   imports: [
     BrowserModule,
     AppRoutingModule,

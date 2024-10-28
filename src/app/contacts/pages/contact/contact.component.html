@@ -1,9 +1,20 @@
 <div class="user-profile">
-  <form [formGroup]="userForm" (ngSubmit)="saveChanges()">
+  <form [formGroup]="form" (ngSubmit)="saveChanges()">
     <!-- Foto del perfil -->
     <div class="photo-container">
       <img *ngIf="!isEditing" [src]="userProfile?.photo" alt="{{ 'userProfile.photoAlt' | translate }}" class="user-photo">
-      <input *ngIf="isEditing" type="text" formControlName="photo" [placeholder]="'userProfile.photoPlaceholder' | translate" class="form-input">
+    </div>
+    <div *ngIf="isEditing">
+      <div class="profile-photo">
+        <div class="profile-items">
+          <input id="uploadImage" hidden (change)="uploadImage($event)" type="file" accept=".png, .jpg, .jpeg">
+          <label id="imageButton" for="uploadImage">
+            <mat-icon>image</mat-icon>
+            Subir foto de perfil
+          </label>
+          <span *ngIf="selectedFileName" id="imageName">{{ selectedFileName }}</span>
+        </div>
+      </div>
     </div>
 
     <!-- Nombre completo cuando no está editando -->
@@ -11,7 +22,7 @@
       <h2>{{ userProfile?.fullName }}</h2>
     </div>
 
-  
+
     <!-- Campos firstName y lastName al editar -->
     <div *ngIf="isEditing">
       <input type="text" formControlName="firstName" [placeholder]="'userProfile.firstNamePlaceholder' | translate" class="form-input">
@@ -31,13 +42,13 @@
       <mat-icon>edit</mat-icon>
     </button>
 
-   
+
     <div *ngIf="isEditing" class="action-buttons">
       <button type="submit" class="btn btn-success">{{ 'userProfile.saveChanges' | translate }}</button>
       <button type="button" class="btn btn-secondary" (click)="cancelEditing()">{{ 'userProfile.cancel' | translate }}</button>
     </div>
   </form>
- 
+
 
 </div>
 

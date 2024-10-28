@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async'
 import { MatToolbar } from "@angular/material/toolbar";
 import { MatAnchor } from "@angular/material/button";
-import { HttpClient, HttpClientModule, provideHttpClient, withInterceptors } from "@angular/common/http";
+import { HttpClient, provideHttpClient, withInterceptors } from "@angular/common/http";
 import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { MatButtonToggleModule } from "@angular/material/button-toggle";
@@ -96,7 +96,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatToolbar,
     MatAnchor,
     HeaderComponent,
-    HttpClientModule,
     MatProgressSpinnerModule,
     MatButtonToggleModule,
     TranslateModule.forRoot({

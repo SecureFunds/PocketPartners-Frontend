@@ -95,3 +95,20 @@ mat-form-field {
   width: 40px; /* Tamaño de los íconos de redes sociales */
   height: auto;
 }
+
+.profile-photo {
+  width: 60%;
+  margin: 10px 20%;
+}
+
+#imageButton{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ff9a69;
+  color: #FFFFFF;
+  padding: 10px;
+  border-radius: 35px;
+  text-align: center;
+  align-content: center;
+}

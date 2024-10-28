@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import {BaseService} from "../../shared/services/base.service";
 import {GroupEntity} from "../model/group.entity";
 import {OperationEntity} from "../model/operation-entity";

@@ -31,7 +31,7 @@ const routes: Routes = [
   { path: 'outgoing/add-payment', component: AddPaymentComponent, canActivate: [authenticationGuard], },
   { path: 'sign-in', component: SignInComponent },
   { path: 'sign-up', component: SignUpComponent },
-  { path: '**', component: PageNotFoundComponent },
+  { path: '*', component: PageNotFoundComponent },
 ];
 
 @NgModule({

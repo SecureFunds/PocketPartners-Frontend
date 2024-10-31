@@ -21,6 +21,7 @@
     "groupInfo": "Group Information",
     "groupName": "Group Name",
     "groupImage": "Group Image (link)",
+    "dueDate": "Due Date",
     "next": "Next",
     "groupCurrency": "Group Currency",
     "currency": "Currency",
@@ -47,7 +48,8 @@
     "currency": "Currency",
     "members": "Members",
     "eachMemberMustPay": "Each member must pay",
-    "paymentDistribution": "Payment distribution"
+    "paymentDistribution": "Payment distribution",
+    "invitationToken": "Invitation Token"
   },
   "expense": {
     "title": "Expense",

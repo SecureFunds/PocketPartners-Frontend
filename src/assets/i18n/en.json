@@ -103,6 +103,9 @@
     "groups": "Groups",
     "noPayments": "No payments yet. Make one!"
   },
+  "expenses": {
+    "uploadedByYou": "Expenses Uploaded by YOU"
+  },
   "transaction": {
     "timeline": "Transaction Timeline",
     "payments": "Payments",

@@ -3,14 +3,12 @@ import { ExpensesEntity } from '../../model/expenses.entity';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PartnerEntity } from "../../../pockets/model/partnerEntity";
-import { OperationEntity } from "../../../group/model/operation-entity";
-import { PaymentEntity } from "../../../payments/model/payment-entity";
+import { forkJoin, of } from 'rxjs';
+import { catchError, retry, switchMap } from 'rxjs/operators';
 import { PaymentService } from "../../../payments/services/payment.service";
 import { GroupMembersService } from "../../../group/services/group-members.service";
 import { ExpensesService } from "../../services/expenses.service";
 import { GroupOperationsService } from "../../../group/services/group-operations.service";
-import { forkJoin } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-form-expense',
@@ -49,11 +47,14 @@ export class FormExpenseComponent {
   ) {}
 
   onSubmit() {
+    // Set up the Expense data
     this.Expense.name = this.firstFormGroup.value.firstCtrl as string;
     this.Expense.amount = parseFloat(<string>this.thirdFormGroup.value.firstCtrl);
     this.Expense.userId = this.user.id;
     this.Expense.groupId = parseInt(<string>this.fourthFormGroup.value.firstCtrl, 10);
     this.Expense.dueDate = new Date(this.fifthFormGroup.value.dueDateCtrl!);
+
+    // Emit the new expense
     this.onAddExpense.emit(this.Expense);
 
     const groupId = this.Expense.groupId;
@@ -73,14 +74,20 @@ export class FormExpenseComponent {
                 userId: member.userId,
                 expenseId: expenseId
               }).pipe(
-                // Crear la operación para cada pago
+                retry(2), // Retry up to 1 times for each payment creation
                 switchMap((payment: any) =>
                   this.groupOperationService.create({
                     groupId: groupId,
                     expenseId: expenseId,
                     paymentId: payment.id
-                  })
-                )
+                  }).pipe(
+                    retry(2) // Retry up to 1 times for each operation creation
+                  )
+                ),
+                catchError((error) => {
+                  console.error('Error creating payment or operation:', error);
+                  return of(null); // Continue with other operations even if one fails
+                })
               );
             });
 
@@ -91,10 +98,10 @@ export class FormExpenseComponent {
       )
     ).subscribe({
       next: (results) => {
-        console.log('Todos los pagos y operaciones creados:', results);
+        console.log('All payments and operations created successfully:', results);
       },
       error: (err) => {
-        console.error('Error al crear pagos y operaciones:', err);
+        console.error('Error during the expense creation flow:', err);
       }
     });
   }
